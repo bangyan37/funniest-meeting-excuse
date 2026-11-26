@@ -27,6 +27,10 @@ def render() -> str:
     assert 1 <= len(text) <= GATE_MAX_CHARS, "entry must fit the gate"
     assert text.strip(), "entry must not be blank"
     assert "\n" not in text, "entry must be one line"
+    # The judge's first criterion is staying on subject: the line must
+    # plainly read as an excuse for skipping a meeting, so guard both
+    # halves of that promise here instead of trusting the constant.
+    assert "skip" in text and "meeting" in text, "entry must stay on subject"
     return text
 
 
